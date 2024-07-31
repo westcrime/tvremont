@@ -1,0 +1,713 @@
+:root {
+    --bg-color: #ececec;
+    --main-color: white;
+    --secondary-color: #213966;
+    font-size: 18px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Медиазапрос для маленьких экранов */
+@media (max-width: 950px) {
+    :root {
+        font-size: 14px;
+    }
+}
+
+/* Медиазапрос для маленьких экранов */
+@media (max-width: 450px) {
+    :root {
+        font-size: 10px;
+    }
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+  
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--bg-color);
+}
+
+section {
+    width: 100%; 
+    height: fit-content; 
+    background-color: var(--bg-color); 
+    padding-top: 1vw; 
+    padding-bottom: 6vw;
+}
+
+.button {
+    background-color: var(--main-color);
+    border-radius: 0;
+    border-style: none;
+    box-sizing: border-box;
+    color: black;
+    cursor: pointer;
+    display: inline-block;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    height: 40px;
+    width: fit-content;
+    line-height: 20px;
+    list-style: none;
+    margin: 0;
+    outline: none;
+    padding: 10px 16px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    transition: color 100ms;
+    vertical-align: baseline;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.button:hover,
+.button:focus {
+  background-color: black;
+  color: var(--main-color);
+}
+
+@media (max-width: 450px) {
+    .button {
+        height: 24px;
+        padding: 7px 12px;
+        line-height: 0px;
+    }
+}
+
+.header {
+    width: 70%;
+    margin-top: 4vw;
+    margin-bottom: 6vw;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Медиазапрос для маленьких экранов */
+@media (max-width: 450px) {
+    .header {
+        margin-top: 40px;
+    }
+}
+
+/* Навбар */
+
+.navbar {
+    position: absolute;
+    display: flex;
+    justify-content: space-between; /* Расположить элементы по краям контейнера */
+    align-items: center; /* Центрирование по вертикали */
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: 100px;
+    background-color: transparent;
+    z-index: 10;
+}
+
+.navbar .logo {
+    width: 25%;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--main-color);
+    margin-left: 3%;
+}
+
+.navbar .links {
+    width: 45%;
+    gap: 5vw;
+    height: 100%;
+    display: flex;
+    justify-content: start; /* Расположить элементы по краям контейнера */
+    align-items: center; 
+}
+
+a {
+    position: relative;
+    text-decoration: none;
+    text-align: center;
+    font-size: 1.25rem;
+    color: var(--main-color);
+    font-weight: 550;
+}
+
+.navbar .links a::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    border-radius: 4px;
+    background-color: var(--main-color);
+    bottom: 0;
+    left: 0;
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform .3s ease-in-out;
+}
+  
+.navbar .links a:hover::before {
+    transform-origin: left;
+    transform: scaleX(1);
+}
+
+.navbar .right-side-part {
+    width: 25%;
+    height: 60%;
+    margin-right: 3%;
+    display: flex;
+    justify-content: end;
+    gap: 20px; /* Промежуток между элементами */
+    align-items: center; /* Центрирование по вертикали */
+}
+
+.navbar .right-side-part .right-side-column {
+    font-weight: 600;
+    color: var(--main-color);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Максимальное расстояние между строками */
+}
+
+.toggle-mobile-navbar {
+    display: none;
+    height: 20px;
+    cursor: pointer;
+    margin-right: 3%;
+}
+
+.mobile-navbar {
+    position: fixed;
+    width: 70%;
+    height: 100vh;
+    top: 0;
+    left: -100%;
+    background-color: var(--main-color);
+    z-index: 20;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: left 1s;
+}
+
+.mobile-navbar.active {
+    left: 0;
+}
+
+.background-while-mobile-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    visibility: hidden;
+    width: 100%;
+    z-index: 15;
+    background-color: white;
+    opacity: 0;
+    transition: all 1s;
+}
+
+.background-while-mobile-navbar.active {
+    visibility: visible;
+    opacity: 80%;
+}
+
+.mobile-navbar .mobile-navbar-content {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: space-between;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 60%;
+}
+
+.mobile-navbar .mobile-navbar-content a {
+    position: relative;
+    text-align: start;
+    color: black;
+    text-decoration: none;
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.mobile-navbar .mobile-navbar-content a::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    border-radius: 4px;
+    background-color: black;
+    bottom: 0;
+    left: 0;
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform .3s ease-in-out;
+}
+  
+.mobile-navbar .mobile-navbar-content a:hover::before {
+    transform-origin: left;
+    transform: scaleX(1);
+}
+
+.mobile-navbar .mobile-navbar-content p {
+    color: gray;
+    font-size: 1.25rem;
+    text-align: center;
+}
+
+/* Медиазапрос для маленьких экранов */
+@media (max-width: 950px) {
+    .navbar {
+        height: 75px; /* Высота навбара увеличивается на маленьких экранах */
+    }
+}
+
+/* Медиазапрос для маленьких экранов */
+@media (max-width: 450px) {
+    .toggle-mobile-navbar {
+        display: block;
+    }
+
+    .navbar {
+        height: 50px; /* Высота навбара увеличивается на маленьких экранах */
+    }
+
+    .navbar .right-side-part {
+        display: none;
+    }
+
+    .navbar .links {
+        display: none;
+    }
+}
+
+/* Главный баннер */
+
+.main-banner {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: 95vh;
+    width: 100%;
+    background: url('./images/back_.jpg') no-repeat center center;
+    background-size: cover; /* Заполнение фона изображением */
+    z-index: 1;
+}
+
+.main-banner .main-banner-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: start;
+    width: 60%;
+}
+
+.main-banner .left-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+}
+
+.main-banner h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--main-color);
+}
+
+.main-banner .strong {
+    text-align: start;
+    height: 100%;
+    text-decoration: underline;
+    font-size: 4rem;
+    font-weight: 900;
+}
+
+/* Медиазапрос для маленьких экранов */
+@media (max-width: 450px) {
+    .main-banner .main-banner-text {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 5%;
+        width: 90%;
+    }
+}
+
+/* Услуги */
+
+.services {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    gap: 5%;
+}
+
+.service-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 350px;
+    margin-top: 10px;
+    border-radius: 10px;
+    width: 350px;
+    text-align: center;
+}
+
+.service-card .icon {
+    height: 30%;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.service-card .icon img {
+    height: 65px;
+    width: 65px;
+}
+
+.service-card .title {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    height: 20%;
+    font-size: 1.25rem;
+    font-weight: 650;
+}
+.service-card .usual-text {
+    margin-left: auto;
+    margin-right: auto;
+    height: 50%;
+    font-weight: 450;
+}
+
+/* Медиазапрос для маленьких экранов */
+@media (min-width: 1600px) {
+    .services {
+        width: 80%;
+    }
+}
+
+@media (max-width: 950px) {
+    .service-card .icon img {
+        height: 55px;
+        width: 55px;
+    }
+
+    .service-card {
+        height: 250px;
+        width: 200px;
+    }
+}
+
+@media (max-width: 450px) {
+    .services {
+        width: 100%;
+    }
+
+    .service-card .icon img {
+        height: 35px;
+        width: 35px;
+    }
+
+    .service-card {
+        height: 200px;
+        width: 150px;
+    }
+}
+
+/* Начало цен */
+
+.services-table {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: separate; /* Изменено с collapse на separate */
+    border-spacing: 0; /* Устанавливает расстояние между ячейками */
+}
+
+.services-table th, .services-table td {
+    border: 2px solid black;
+    border-top: none; /* Удаляем верхнюю границу */
+    border-left: none; /* Удаляем левую границу */
+    padding: 15px;
+    text-align: left;
+}
+
+.services-table th {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.services-table td {
+    font-weight: 500;
+    font-size: 1.25rem;
+}
+
+/* Удаляем нижнюю границу у последней строки и правую границу у последнего столбца */
+.services-table tr:last-child td {
+    border-bottom: none;
+}
+
+.services-table tr th:last-child {
+    border-right: none;
+}
+
+.services-table tr td:last-child {
+    border-right: none;
+}
+
+/* Начало информации */
+
+.information-container {
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: space-between;
+    align-items: start;
+}
+
+.information-container .information-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: start;
+    height: 100%;
+    width: 30%;
+}
+
+.title-container {
+    font-size: 1.25rem;
+    height: 2.5rem;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+}
+
+.title-container .icon {
+    margin-left: 2vw;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Если нужно горизонтальное центрирование */
+    height: 100%; /* Убедитесь, что у родителя есть высота */
+}
+
+.title-container .icon img {
+    height: 2.5rem;
+    width: 2.5rem;
+}
+
+.information-card .usual-text {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+@media (max-width: 950px) {
+    .information-container {
+        flex-direction: column;
+        width: 70%;
+        height: 60vh;
+        justify-content: space-between;
+        align-items: start;
+    }
+
+    .information-container .information-card {
+        width: 100%;
+        height: 33%;
+    }
+
+    .title-container {
+        margin-bottom: -20px;
+    }
+}
+
+/* Контакты */
+
+.container-for-contacts {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 500px;
+}
+
+.container-for-contacts .contacts-column {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+    gap: 2vw;
+    width: 40%;
+    padding: 3%;
+}
+
+.container-for-contacts .contacts-column .row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    gap: 2vw;
+}
+
+.row img {
+    height: 3rem;
+    width: 3rem;
+}
+
+.container-for-contacts .picture-column {
+    width: 60%;
+    height: 100%;
+    background: url('./images/back2.jpg') no-repeat center center;
+    background-size: cover; /* Заполнение фона изображением */
+}
+
+
+.container-for-contacts .contacts-column h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.container-for-contacts .contacts-column p {
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+
+@media (max-width: 950px) {
+    .container-for-contacts .contacts-column {
+        width: 60%;
+    }
+
+    .container-for-contacts .picture-column {
+        width: 40%;
+    }
+
+    .container-for-contacts {
+        height: 350px;
+    }
+}
+
+@media (max-width: 450px) {
+    .container-for-contacts {
+        height: 250px;
+    }
+}
+
+/* Карта */
+
+.map {
+    position:relative;
+    overflow:hidden;
+    width:100%;
+}
+
+.map a {
+    color: #eee;
+    font-size: 0.75rem;
+    position: absolute;
+}
+
+.map a:first-child {
+    top: 0px;
+}
+
+.map a:last-child {
+    top: 14px;
+}
+
+.map iframe {
+    width:100%;
+    height:400px;
+    position:relative;
+    border: none;
+}
+
+/* Футер */
+
+footer {
+    background-color: #041a42;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+}
+
+footer .footer-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+footer .footer-column {
+    text-align: start;
+    flex: 1;
+    min-width: 200px;
+    margin: 10px;
+}
+
+footer .footer-column h3 {
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+}
+
+footer .footer-column ul {
+    list-style: none;
+    padding: 0;
+}
+
+footer .footer-column ul li {
+    margin-bottom: 5px;
+}
+
+footer .footer-column ul li a {
+    color: #fff;
+    font-weight: 4100;
+    text-decoration: none;
+}
+
+footer .footer-column ul li a:hover {
+    text-decoration: underline;
+}
+
+footer .footer-bottom {
+    margin-top: 20px;
+    font-size: 0.875rem;
+}
+
+.watermark {
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    font-size: 0.75rem;
+}
